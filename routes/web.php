@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\ProductoController;
+use App\Models\Producto;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +19,20 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+// Route::get('/registro_producto', function (){
+//     return view('/productos_todo/registro_producto');
+// });
+
+// Route::POST('/registro_producto', function (Request $request){
+//     // $producto = new Producto();
+//     // $producto->nombre = $request->nombre_prod;
+//     // $producto->precio = $request->precio;
+//     // $producto->save();
+//     dd($request->all());
+    
+// });
+
+
+Route::resource('producto',ProductoController::class);

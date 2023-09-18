@@ -12,7 +12,7 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        //
+        return view('/productos_todo/listado_producto');
     }
 
     /**
@@ -20,7 +20,7 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        //
+        return view('/productos_todo/registro_producto');
     }
 
     /**
@@ -52,7 +52,7 @@ class ProductoController extends Controller
      */
     public function update(Request $request, Producto $producto)
     {
-        //
+        //Implementar este que llegue aqui y guarda
     }
 
     /**
