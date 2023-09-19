@@ -9,10 +9,13 @@
 <body>
     <h1>Formulario de Producto</h1>
 
-    <form action="registro_producto" method="POST">
+    <form action="/producto" method="POST">
+        <!-- Esta es una ruta absoluta para el store {{ route('producto.store') }} -->
 
-        <label for="nombre_prod">Nombre del producto</label><br>
-        <input type="text" name="nombre_prod"><br>
+        @csrf
+
+        <label for="nombre">Nombre del producto</label><br>
+        <input type="text" name="nombre"><br>
 
         <label for="precio">Precio</label><br>
         <input type="number" name="precio" step="0.01"><br>
