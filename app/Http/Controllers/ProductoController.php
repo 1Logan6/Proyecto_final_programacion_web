@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Producto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductoController extends Controller
 {
@@ -12,7 +13,10 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        return view('/productos_todo/listado_producto');
+        $productos = Producto::all();
+        // dd($productos);
+
+        return view('/productos_todo/listado_producto', compact('productos'));
     }
 
     /**
@@ -30,9 +34,12 @@ class ProductoController extends Controller
     {
         //
         $producto = new Producto();
-        $producto -> nombre = $request->nombre;
-        $producto -> precio = $request->precio;
-        $producto -> save();
+        $producto->nombre = $request->nombre;
+        $producto->precio = $request->precio;
+        $producto->descripcion = $request->descripcion;
+        $producto->fecha_vencimiento = $request->fecha_vencimiento;
+        $producto->stock = $request->stock;
+        $producto->save();
 
         return redirect('/producto');
     }
@@ -43,6 +50,7 @@ class ProductoController extends Controller
     public function show(Producto $producto)
     {
         //
+        return view('/productos_todo/mostrar_productos');
     }
 
     /**
