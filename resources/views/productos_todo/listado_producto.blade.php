@@ -9,6 +9,13 @@
 <body>
 
     <h1>Este es el index de producto</h1>
+
+    @foreach ($productos as $producto)
+        <li> {{ $producto->nombre }} </li>
+        -----------------------------------
+        <li> {{ $producto->precio }} </li>
+    @endforeach
+    <!-- $productos = productos_todo::all(); -->
     
 </body>
 </html>

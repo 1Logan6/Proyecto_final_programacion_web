@@ -12,7 +12,9 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        return view('/productos_todo/listado_producto');
+        $productos = Producto::all();
+        
+        return view('/productos_todo/listado_producto', compact('productos'));
     }
 
     /**
@@ -32,6 +34,9 @@ class ProductoController extends Controller
         $producto = new Producto();
         $producto -> nombre = $request->nombre;
         $producto -> precio = $request->precio;
+        $producto -> descripcion = $request->descripcion;
+        $producto -> fecha_vencimiento = $request->fecha_vencimiento; 
+        $producto -> stock = $request->stock;
         $producto -> save();
 
         return redirect('/producto');
