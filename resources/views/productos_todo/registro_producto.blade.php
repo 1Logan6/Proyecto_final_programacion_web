@@ -7,6 +7,8 @@
     <title>Registro de producto</title>
 </head>
 <body>
+    @include('partials.navigation')
+    
     <h1>Formulario de Producto</h1>
 
     <form action="/producto" method="POST">

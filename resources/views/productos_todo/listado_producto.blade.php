@@ -10,6 +10,8 @@
 
 <body>
 
+    @include('partials.navigation')
+
     <h1>Estos son los productos que tenemos: </h1><br>
 
     <ul>
