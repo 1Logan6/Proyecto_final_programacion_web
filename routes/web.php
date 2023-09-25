@@ -34,5 +34,6 @@ Route::get('/', function () {
     
 // });
 
+Route::get('/producto/pdf/get', [ProductoController::class, 'pdf'])->name('producto.pdf');
 
 Route::resource('producto',ProductoController::class);

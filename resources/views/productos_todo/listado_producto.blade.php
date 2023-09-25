@@ -12,12 +12,17 @@
 
     @include('partials.navigation')
 
-    <h1>Estos son los productos que tenemos: </h1><br>
+    <h1> Estos son los productos que tenemos: </h1><br>
 
     <ul>
         @foreach ($productos as $producto)
-            <li>{{$producto -> nombre}}</li>
-            <li>{{$producto -> precio}}</li>
+            <li>
+                
+                <a href="{{ route('producto.show', $producto) }}">
+                    {{ $producto -> nombre }}
+                </a>
+            </li>
+            {{-- <li>{{$producto -> precio}}</li> --}}
         @endforeach
     </ul>
 

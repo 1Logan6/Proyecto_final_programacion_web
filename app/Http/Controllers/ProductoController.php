@@ -49,8 +49,8 @@ class ProductoController extends Controller
      */
     public function show(Producto $producto)
     {
-        //
-        return view('/productos_todo/mostrar_productos');
+        
+        return view('/productos_todo/mostrar_productos', compact("producto"));
     }
 
     /**
