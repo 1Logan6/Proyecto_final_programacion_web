@@ -17,19 +17,19 @@
         @csrf
 
         <label for="nombre">Nombre del producto</label><br>
-        <input type="text" name="nombre"><br>
+        <input type="text" name="nombre" value="{{old('nombre')}}"><br>
 
         <label for="precio">Precio</label><br>
-        <input type="number" name="precio" step="0.01"><br>
+        <input type="number" name="precio" step="0.01" value="{{old ('precio')}}"><br>
 
         <label for="descripcion">Descripcion</label><br>
-        <input type="text" name="descripcion"><br>
+        <input type="text" name="descripcion" value="{{old ('descripcion')}}"><br>
 
         <label for="fecha_vencimiento">Fecha de vencimiento</label><br>
-        <input type="date" name="fecha_vencimiento"><br>
+        <input type="date" name="fecha_vencimiento" value="{{old ('fecha_vencimiento')}}"><br>
 
         <label for="stock">Cantidad stock</label><br>
-        <input type="number" name="stock"><br>
+        <input type="number" name="stock" value="{{old ('stock')}}"><br>
 
         
         <input type="submit" value="Enviar">
