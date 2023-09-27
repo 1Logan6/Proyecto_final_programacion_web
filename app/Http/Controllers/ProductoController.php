@@ -50,7 +50,7 @@ class ProductoController extends Controller
     public function show(Producto $producto)
     {
         
-        return view('/productos_todo/mostrar_productos', compact("producto"));
+        return view('/productos_todo/mostrar_producto', compact("producto"));
     }
 
     /**
@@ -58,7 +58,7 @@ class ProductoController extends Controller
      */
     public function edit(Producto $producto)
     {
-        //
+        return view('/productos_todo/editar_producto', compact("producto"));
     }
 
     /**
