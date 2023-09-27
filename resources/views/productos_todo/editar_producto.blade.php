@@ -9,12 +9,13 @@
 <body>
     @include('partials.navigation')
     
-    <h1>Formulario de Producto</h1>
+    <h1>Formulario de editar producto</h1>
 
-    <form action="/producto" method="POST">
+    <form action="{{route('producto.update', $producto)}}" method="POST">
         <!-- Esta es una ruta absoluta para el store {{ route('producto.store') }} -->
 
         @csrf
+        @method('PATCH')
 
         <label for="nombre">Nombre del producto</label><br>
         <input type="text" name="nombre" value = "{{$producto->nombre}}"><br>
