@@ -21,7 +21,7 @@
         <input type="text" name="nombre" value = "{{ old ('nombre') ?? $producto->nombre}}"><br>
 
         <label for="precio">Precio</label><br>
-        <input type="number" name="precio" step="0.01" value = "{{ old('precio') ?? $producto->precio}}"><br>
+        <input type="number" name="precio" step="0.01" value = "{{old('precio') ?? $producto->precio}}"><br>
 
         <label for="descripcion">Descripcion</label><br>
         <input type="text" name="descripcion" value = "{{ old('descripcion') ?? $producto->descripcion}}"><br>
