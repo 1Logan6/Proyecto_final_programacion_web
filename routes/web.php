@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\VentasController;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,12 +32,13 @@ Route::get('/', function () {
 //     // $producto->precio = $request->precio;
 //     // $producto->save();
 //     dd($request->all());
-    
+
 // });
 
 Route::get('/producto/pdf/get', [ProductoController::class, 'pdf'])->name('producto.pdf');
 
-Route::resource('producto',ProductoController::class);
+Route::resource('producto', ProductoController::class);
+Route::resource('venta', VentasController::class);
 
 Route::middleware([
     'auth:sanctum',

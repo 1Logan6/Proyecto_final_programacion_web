@@ -2,18 +2,16 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\VentasController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Producto extends Model
+class ventas extends Model
 {
     use HasFactory;
 
-    public $timestamps = false;
-
-
-    public function productos()
+    public function venta()
     {
-        return $this->hasMany(Producto::class);
+        return $this->belongsTo(Venta::class);
     }
 }
