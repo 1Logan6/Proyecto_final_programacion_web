@@ -21,6 +21,9 @@
                 <a href="{{ route('producto.show', $producto) }}">
                     {{ $producto -> nombre }}
                 </a>
+                <a href="{{ route('producto.edit', $producto) }}">
+                    Edit
+                </a>
             </li>
             {{-- <li>{{$producto -> precio}}</li> --}}
         @endforeach
