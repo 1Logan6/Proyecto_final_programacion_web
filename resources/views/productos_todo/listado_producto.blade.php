@@ -24,6 +24,13 @@
                 <a href="{{ route('producto.edit', $producto) }}">
                     Edit
                 </a>
+
+                <form action="{{route('producto.destroy', $producto)}}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit">Eliminar</button>
+                </form>
+
             </li>
             {{-- <li>{{$producto -> precio}}</li> --}}
         @endforeach
