@@ -66,7 +66,23 @@ class ProductoController extends Controller
      */
     public function update(Request $request, Producto $producto)
     {
-        //Implementar este que llegue aqui y guarda
+        $request->validate([
+            'nombre' => 'required',
+            'precio' => 'required',
+            'descripcion' => 'required',
+            'fecha_vencimiento' => 'required',
+            'stock' => 'required',
+        ]);
+
+        $producto->nombre = $request->nombre;
+        $producto->precio = $request->precio;
+        $producto->descripcion = $request->descripcion;
+        $producto->fecha_vencimiento = $request->fecha_vencimiento;
+        $producto->stock = $request->stock;
+
+        $producto->save();
+
+        return redirect('/producto');
     }
 
     /**
