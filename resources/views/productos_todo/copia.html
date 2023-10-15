@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+
+    @include('partials.navigation')
+
+    <h1> Estos son los productos que tenemos: </h1><br>
+
+    <ul>
+        @foreach ($productos as $producto)
+            <li>
+                
+                <a href="{{ route('producto.show', $producto) }}">
+                    {{ $producto -> nombre }}
+                </a>
+                <a href="{{ route('producto.edit', $producto) }}">
+                    Edit
+                </a>
+
+                <form action="{{route('producto.destroy', $producto)}}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit">Eliminar</button>
+                </form>
+
+            </li>
+            {{-- <li>{{$producto -> precio}}</li> --}}
+        @endforeach
+    </ul>
+
+    
+
+</body>
+
+</html>
