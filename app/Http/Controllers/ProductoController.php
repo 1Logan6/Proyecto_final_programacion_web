@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\DB;
 
 class ProductoController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware('auth')->only(['index', 'show']);
+    // }
+    
     /**
      * Display a listing of the resource.
      */
@@ -32,14 +37,22 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $producto = new Producto();
-        $producto->nombre = $request->nombre;
-        $producto->precio = $request->precio;
-        $producto->descripcion = $request->descripcion;
-        $producto->fecha_vencimiento = $request->fecha_vencimiento;
-        $producto->stock = $request->stock;
-        $producto->save();
+        $request->validate([
+            'nombre' => 'required',
+            'precio' => 'required',
+            'descripcion' => 'required',
+            'fecha_vencimiento' => 'required',
+            'stock' => 'required',
+        ]);
+
+        Producto::create($request->all());
+        // $producto = new Producto();
+        // $producto->nombre = $request->nombre;
+        // $producto->precio = $request->precio;
+        // $producto->descripcion = $request->descripcion;
+        // $producto->fecha_vencimiento = $request->fecha_vencimiento;
+        // $producto->stock = $request->stock;
+        // $producto->save();
 
         return redirect('/producto');
     }
@@ -74,13 +87,14 @@ class ProductoController extends Controller
             'stock' => 'required',
         ]);
 
-        $producto->nombre = $request->nombre;
-        $producto->precio = $request->precio;
-        $producto->descripcion = $request->descripcion;
-        $producto->fecha_vencimiento = $request->fecha_vencimiento;
-        $producto->stock = $request->stock;
+        // $producto->nombre = $request->nombre;
+        // $producto->precio = $request->precio;
+        // $producto->descripcion = $request->descripcion;
+        // $producto->fecha_vencimiento = $request->fecha_vencimiento;
+        // $producto->stock = $request->stock;
+        // $producto->save();
 
-        $producto->save();
+        Producto::where('id', $producto->id)->update($request->except('_token', '_method'));
 
         return redirect('/producto');
     }
