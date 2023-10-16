@@ -33,13 +33,19 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         //
-        $producto = new Producto();
+
+        Producto::create($request->all());
+
+        /* $producto = new Producto();
+
+        //Producto::create($request->all()) Esto sirve sirve si los nombres coinciden con el de el form y la tabla de la base
+
         $producto->nombre = $request->nombre;
         $producto->precio = $request->precio;
         $producto->descripcion = $request->descripcion;
         $producto->fecha_vencimiento = $request->fecha_vencimiento;
         $producto->stock = $request->stock;
-        $producto->save();
+        $producto->save(); */
 
         return redirect('/producto');
     }
@@ -74,13 +80,17 @@ class ProductoController extends Controller
             'stock' => 'required',
         ]);
 
-        $producto->nombre = $request->nombre;
+        /* dd($request->all()); */
+        Producto::where('id', $producto->id)
+            ->update($request->except('_token', '_method'));
+
+        /* $producto->nombre = $request->nombre;
         $producto->precio = $request->precio;
         $producto->descripcion = $request->descripcion;
         $producto->fecha_vencimiento = $request->fecha_vencimiento;
         $producto->stock = $request->stock;
 
-        $producto->save();
+        $producto->save(); */
 
         return redirect('/producto');
     }
