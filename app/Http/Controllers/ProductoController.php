@@ -33,7 +33,8 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         //
-
+        
+        $request->merge(['user_id'=>Auth::id()]);
         Producto::create($request->all());
 
         /* $producto = new Producto();

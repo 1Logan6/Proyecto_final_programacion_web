@@ -24,8 +24,8 @@ class Producto extends Model
     public $timestamps = false;
 
 
-    public function productos()
+    public function User()
     {
-        return $this->hasMany(Producto::class);
+        return $this->belongsTo(User::class);
     }
 }
