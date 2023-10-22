@@ -38,6 +38,24 @@
                     Agregar producto
                 </a>
               </li>
+
+              <li>
+                <a
+                  class="text-gray-500 transition hover:text-gray-500/75"
+                  href="/proveedor/create"
+                >
+                    Agregar proveedor
+                </a>
+              </li>
+
+              <li>
+                <a
+                  class="text-gray-500 transition hover:text-gray-500/75"
+                  href="/proveedor"
+                >
+                    Nustros proveedores
+                </a>
+              </li>
             </ul>
           </nav>
         </div>
