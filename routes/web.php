@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\VentasController;
 use App\Models\Producto;
 use Illuminate\Http\Request;
@@ -38,6 +39,7 @@ Route::get('/', function () {
 Route::get('/producto/pdf/get', [ProductoController::class, 'pdf'])->name('producto.pdf');
 
 Route::resource('producto', ProductoController::class);
+Route::resource('proveedor', ProveedorController::class);
 Route::resource('venta', VentasController::class);
 
 Route::middleware([
