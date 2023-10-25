@@ -21,7 +21,7 @@ class Producto extends Model
     /* protected $guarded = ['id']; */
 
 
-    protected $table = 'proveedors';
+    protected $table = 'productos';
     public $timestamps = false;
 
 

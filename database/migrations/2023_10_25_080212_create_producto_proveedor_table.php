@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('proveedor_id');
     
             $table->foreign('producto_id')->references('id')->on('productos')->onDelete('cascade');
-            $table->foreign('proveedor_id')->references('id')->on('proveedores')->onDelete('cascade');
+            $table->foreign('proveedor_id')->references('id')->on('proveedors')->onDelete('cascade');
         });
     }
 

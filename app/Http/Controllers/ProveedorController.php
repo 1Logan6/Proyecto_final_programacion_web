@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Proveedor;
+use App\Models\Producto;
 use Illuminate\Http\Request;
 
 class ProveedorController extends Controller
@@ -25,7 +26,8 @@ class ProveedorController extends Controller
     public function create()
     {
         //
-        return view('proveedores_todo/createProveedor');
+        $prods = Producto::all();
+        return view('proveedores_todo/createProveedor', compact('prods'));
     }
 
     /**
@@ -42,7 +44,11 @@ class ProveedorController extends Controller
             'nombre_empresa' => 'required',
         ]);
 
-        Proveedor::create($request->all());
+        // Proveedor::create($request->all());
+
+        $prods = Proveedor::create($request->all());
+
+        $prods->productos()->attach($request->producto_id);
 
         // return redirect('/proveedor');
         return redirect()->route('proveedor.index'); //Esto es mas facil que la forma de justo arriba
