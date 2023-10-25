@@ -17,4 +17,9 @@ class proveedor extends Model
         'direccion',
         'nombre_empresa',
     ];
+
+    public function productos()
+    {
+        return $this->belongsToMany(Producto::class);
+    }
 }

@@ -21,11 +21,17 @@ class Producto extends Model
     /* protected $guarded = ['id']; */
 
 
+    protected $table = 'proveedors';
     public $timestamps = false;
 
 
     public function productos()
     {
         return $this->hasMany(Producto::class);
+    }
+
+    public function proveedores()
+    {
+        return $this->belongsToMany(Proveedor::class);
     }
 }
