@@ -16,6 +16,8 @@ class ProductoController extends Controller
         $productos = Producto::all();
         // dd($productos);
 
+        // $productos = Producto::with('user')->get();
+
         return view('/productos_todo/listado_producto', compact('productos'));
     }
 
