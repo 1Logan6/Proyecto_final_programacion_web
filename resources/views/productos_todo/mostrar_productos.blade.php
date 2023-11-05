@@ -68,6 +68,11 @@
                       <p class="font-medium">{{ $producto -> fecha_vencimiento }}</p>
                     </div>
                   </div>
+                  <form method="post" action="/realizar-venta">
+                    @csrf
+                    <input type="hidden" name="product_id" value="{{ $producto->id }}">
+                    <button type="submit">Comprar</button>
+                </form>
                 </div>
               </div>
             </a>

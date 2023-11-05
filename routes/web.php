@@ -2,8 +2,9 @@
 
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProveedorController;
-use App\Http\Controllers\VentasController;
+use App\Http\Controllers\VentaController;
 use App\Models\Producto;
+use App\Models\Venta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -40,7 +41,8 @@ Route::get('/producto/pdf/get', [ProductoController::class, 'pdf'])->name('produ
 
 Route::resource('producto', ProductoController::class);
 Route::resource('proveedor', ProveedorController::class);
-Route::resource('venta', VentasController::class);
+Route::resource('venta', VentaController::class);
+Route::post('/realizar-venta',  [VentaController::class, 'realizarVenta']);
 
 Route::middleware([
     'auth:sanctum',
