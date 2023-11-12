@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ventas;
+use App\Models\Carrito;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class VentasController extends Controller
+class CarritoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +35,7 @@ class VentasController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ventas $ventas)
+    public function show(Carrito $carrito)
     {
         //
     }
@@ -42,7 +43,7 @@ class VentasController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ventas $ventas)
+    public function edit(Carrito $carrito)
     {
         //
     }
@@ -50,7 +51,7 @@ class VentasController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ventas $ventas)
+    public function update(Request $request, Carrito $carrito)
     {
         //
     }
@@ -58,8 +59,22 @@ class VentasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ventas $ventas)
+    public function destroy(Carrito $carrito)
     {
         //
+    }
+
+    public function agregarACarrito(Request $request)
+    {
+        //
+        $userId = Auth::id();
+        $productId = $request->input('product_id');
+
+        Carrito::create([
+            'user_id' => $userId,
+            'producto_id' => $productId,
+        ]);
+
+        return redirect('/producto');
     }
 }

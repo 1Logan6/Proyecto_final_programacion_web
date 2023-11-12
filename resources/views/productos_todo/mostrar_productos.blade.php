@@ -71,11 +71,19 @@
                 </div>
               </div>
             </a>
+            <form method="post" action="/agregar-carrito">
+              @csrf
+              <input type="hidden" name="product_id" value="{{ $producto->id }}">
+              <button type="submit" class="group inline-block rounded-full bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-[2px] hover:text-white focus:outline-none focus:ring active:text-opacity-75">
+                  <span class="block rounded-full bg-white px-8 py-3 text-sm font-medium group-hover:bg-transparent">
+                      Comprar
+                  </span>
+              </button>
+          </form>
       </div>
     </div>
+    
 
 </body>
-
-
 
 </html>

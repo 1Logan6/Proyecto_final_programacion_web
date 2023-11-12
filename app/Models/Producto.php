@@ -34,4 +34,9 @@ class Producto extends Model
     {
         return $this->belongsToMany(Proveedor::class);
     }
+
+    public function carritos()
+    {
+        return $this->belongsToMany(Carrito::class);
+    }
 }

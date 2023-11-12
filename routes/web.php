@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProveedorController;
-use App\Http\Controllers\VentasController;
+use App\Http\Controllers\CarritoController;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -40,7 +40,8 @@ Route::get('/producto/pdf/get', [ProductoController::class, 'pdf'])->name('produ
 
 Route::resource('producto', ProductoController::class);
 Route::resource('proveedor', ProveedorController::class);
-Route::resource('venta', VentasController::class);
+Route::resource('carrito', CarritoController::class);
+Route::post('/agregar-carrito', [CarritoController::class, 'agregarACarrito']);
 
 Route::middleware([
     'auth:sanctum',
