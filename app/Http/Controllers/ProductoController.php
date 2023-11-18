@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Mail\NotificaProductoCreado;
+use Illuminate\Support\Facades\Mail;
 
 class ProductoController extends Controller
 {
@@ -34,7 +36,7 @@ class ProductoController extends Controller
     {
         //
 
-        Producto::create($request->all());
+        $producto = Producto::create($request->all());
 
         /* $producto = new Producto();
 
@@ -47,6 +49,8 @@ class ProductoController extends Controller
         $producto->stock = $request->stock;
         $producto->save(); */
 
+
+        Mail::to($request->user())->send(new NotificaProductoCreado($producto));
         return redirect('/producto');
     }
 
