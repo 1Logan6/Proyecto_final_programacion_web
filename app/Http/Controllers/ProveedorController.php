@@ -60,6 +60,7 @@ class ProveedorController extends Controller
     public function show(proveedor $proveedor)
     {
         //
+        $this->authorize('view', $proveedor);
         return view('proveedores_todo.showProveedor', compact('proveedor'));
     }
 

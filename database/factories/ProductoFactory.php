@@ -17,7 +17,7 @@ class ProductoFactory extends Factory
     public function definition(): array
     {
         return [
-            'precio'=>fake()->randomDigit(),
+            'precio'=>fake()->randomFloat(2, 10, 999),
             'descripcion'=>fake()->sentence(),
             'nombre'=>fake()->sentence(),
             'fecha_vencimiento'=>fake()->date(),
