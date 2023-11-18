@@ -66,6 +66,30 @@
                     Nuestros proveedores
                 </a>
               </li>
+
+              <li>
+                <span class="inline-flex rounded-md">
+                  <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
+                      {{ Auth::user()->name }}
+                  </button>
+                </span>
+              </li>
+
+              <li>
+                <a href="{{ route('profile.show') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition duration-150">
+                  {{ __('Profile') }}
+              </a>
+              </li>
+              
+              <li>
+                <form method="POST" action="{{ route('logout') }}">
+                  @csrf
+                  <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition duration-150">
+                      {{ __('Log Out') }}
+                  </a>
+              </form>
+              </li>
+
             </ul>
           </nav>
         </div>
