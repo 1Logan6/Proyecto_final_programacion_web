@@ -15,7 +15,6 @@ class ProductoController extends Controller
     {
         $productos = Producto::all();
         // dd($productos);
-
         return view('/productos_todo/listado_producto', compact('productos'));
     }
 
@@ -24,6 +23,7 @@ class ProductoController extends Controller
      */
     public function create()
     {
+        $this->authorize('viewAny', Producto::class);
         return view('/productos_todo/registro_producto');
     }
 
@@ -64,6 +64,7 @@ class ProductoController extends Controller
      */
     public function edit(Producto $producto)
     {
+        $this->authorize('viewAny', Producto::class);
         return view('/productos_todo/editar_producto', compact("producto"));
     }
 
@@ -100,6 +101,7 @@ class ProductoController extends Controller
      */
     public function destroy(Producto $producto)
     {
+        $this->authorize('viewAny', Producto::class);
         $producto->delete();
         return redirect()->route('producto.index');
     }
