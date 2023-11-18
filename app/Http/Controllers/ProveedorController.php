@@ -15,7 +15,7 @@ class ProveedorController extends Controller
     {
         //
         //return view('proveedores_todo/indexProveedor');
-
+        // $this->authorize('viewAny', Proveedor::class);
         $proveedores = Proveedor::all();
         return view('proveedores_todo/indexProveedor', compact('proveedores'));
     }

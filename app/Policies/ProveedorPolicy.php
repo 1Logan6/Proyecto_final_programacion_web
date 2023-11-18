@@ -14,6 +14,11 @@ class ProveedorPolicy
     public function viewAny(User $user): bool
     {
         //
+        if($user->email == 'logan@gmail.com'){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**

@@ -30,9 +30,13 @@
                             <div class="flex-grow">
                                 <h2 class="text-gray-900 title-font font-medium"><a
                                         href="{{ route('proveedor.show', $proveedor) }}">
-                                        {{ $proveedor->nombre_completo }}
+                                        {{ $proveedor->nombre_empresa }}
                                     </a></h2>
-                                <p class="text-gray-500">{{ $proveedor->nombre_empresa }}</p>
+
+                                    {{-- Este can solo muestra el nombre del proveedor al usuario del gate --}}
+                                @can('acces-admin')
+                                    <p class="text-gray-500">{{ $proveedor->nombre_empresa }}</p>
+                                @endcan
 
                                 <div class="space-x-4">
                                     <button

@@ -31,21 +31,31 @@
               </li>
   
               <li>
-                <a
-                  class="text-gray-500 transition hover:text-gray-500/75"
-                  href="/producto/create"
-                >
-                    Agregar producto
-                </a>
+                {{-- Este can solo mostrara este apartado si se cumple el gate --}}
+                @can('acces-admin')
+                                    
+                  <a
+                    class="text-gray-500 transition hover:text-gray-500/75"
+                    href="/producto/create"
+                  >
+                      Agregar producto
+                  </a>
+
+                @endcan
               </li>
 
               <li>
-                <a
-                  class="text-gray-500 transition hover:text-gray-500/75"
-                  href="/proveedor/create"
-                >
-                    Agregar proveedor
-                </a>
+                {{-- Este can solo mostrara este apartado si se cumple el gate, este esta en authserviceprovider --}}
+                @can('acces-admin')
+
+                  <a
+                    class="text-gray-500 transition hover:text-gray-500/75"
+                    href="/proveedor/create"
+                  >
+                      Agregar proveedor
+                  </a>
+
+                @endcan
               </li>
 
               <li>
@@ -53,7 +63,7 @@
                   class="text-gray-500 transition hover:text-gray-500/75"
                   href="/proveedor"
                 >
-                    Nustros proveedores
+                    Nuestros proveedores
                 </a>
               </li>
             </ul>
