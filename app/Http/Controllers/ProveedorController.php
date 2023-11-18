@@ -70,8 +70,9 @@ class ProveedorController extends Controller
     public function edit(proveedor $proveedor)
     {
         //
+        $prods = Producto::all();
         $this->authorize('viewAny', Proveedor::class);
-        return view('proveedores_todo.editProveedor', compact('proveedor'));
+        return view('proveedores_todo.editProveedor', compact('proveedor','prods'));
     }
 
     /**
@@ -89,7 +90,13 @@ class ProveedorController extends Controller
         ]);
 
         Proveedor::where('id', $proveedor->id)
-            ->update($request->except('_token','_method'));
+            ->update($request->except('_token','_method','producto_id'));
+        
+         // Actualizar los campos del proveedor
+        $proveedor->update($request->except('_token','_method','producto_id'));
+
+        // Actualizar la relación muchos a muchos con productos
+        $proveedor->productos()->sync($request->producto_id);
 
         return redirect()->route('proveedor.index');
     }

@@ -49,7 +49,9 @@
             <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
                 <dt class="font-medium text-gray-900">Productos que le pedimos</dt>
                 <dd class="text-gray-700 sm:col-span-2">
-                    Esto sigue en proceso, es por la relacion con las tablas.
+                    @foreach ($proveedor->productos as $producto)
+                        {{ $producto->nombre }}{{ !$loop->last ? ',' : '' }}
+                    @endforeach
                 </dd>
             </div>
         </dl>

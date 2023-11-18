@@ -2,7 +2,7 @@
     <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
       <div class="flex h-16 items-center justify-between">
         <div class="md:flex md:items-center md:gap-12">
-          <a class="block text-teal-600" href="/">
+          <a class="block text-teal-600" href="/producto">
             <span class="sr-only">Home</span>
             <svg
               class="h-8"
