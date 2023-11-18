@@ -15,7 +15,6 @@ class ProveedorController extends Controller
     {
         //
         //return view('proveedores_todo/indexProveedor');
-        // $this->authorize('viewAny', Proveedor::class);
         $proveedores = Proveedor::all();
         return view('proveedores_todo/indexProveedor', compact('proveedores'));
     }
@@ -26,6 +25,7 @@ class ProveedorController extends Controller
     public function create()
     {
         //
+        $this->authorize('viewAny', Proveedor::class);
         $prods = Producto::all();
         return view('proveedores_todo/createProveedor', compact('prods'));
     }
@@ -70,6 +70,7 @@ class ProveedorController extends Controller
     public function edit(proveedor $proveedor)
     {
         //
+        $this->authorize('viewAny', Proveedor::class);
         return view('proveedores_todo.editProveedor', compact('proveedor'));
     }
 
@@ -99,6 +100,7 @@ class ProveedorController extends Controller
     public function destroy(proveedor $proveedor)
     {
         //
+        $this->authorize('viewAny', Proveedor::class);
         $proveedor->delete();
         return redirect()->route('proveedor.index');
     }
