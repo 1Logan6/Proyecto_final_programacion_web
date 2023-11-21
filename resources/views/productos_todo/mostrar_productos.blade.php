@@ -16,11 +16,10 @@
     <div class="min-h-screen flex items-center justify-center">
       <div class="max-w-sm mx-auto">
           <a href="#" class="block rounded-lg p-4 shadow-sm shadow-indigo-100">
-              <img
-                alt="Home"
-                src="https://dulcesdelarosa.com.mx/wp-content/uploads/dulces-de-la-rosa-caramelos-suaves-aciduladito-800x600.png"
-                class="h-56 w-full rounded-md object-cover"
-              />
+            {{-- @foreach ($imagenesAleatorias as $imagen)
+                <img src="{{ $imagen }}" alt="Imagen aleatoria">
+            @endforeach --}}
+            <img src="{{ $producto->imagen_url }}" alt="Imagen del producto">
             
               <div class="mt-2">
                 <dl>
@@ -74,6 +73,10 @@
       </div>
     </div>
 
+    <script>
+      getRandomImage();
+    </script>
+  
 </body>
 
 

@@ -50,12 +50,13 @@
                 @foreach ($productos as $producto)
                     <li>
                         <a href="#" class="block overflow-hidden group">
-                        <img
+                        {{-- <img
                             src="https://www.superaki.mx/cdn/shop/collections/DULCES.png?v=1634682356"
                             alt=""
                             class="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[450px]"
-                        />
-                
+                        /> --}}
+                        <img src="{{ $producto->imagen_url }}" alt="Imagen del producto">
+
                         <div class="relative pt-3 bg-white">
                             <h3
                             class="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4"
