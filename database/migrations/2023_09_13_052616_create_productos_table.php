@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->smallInteger('stock');
             $table->string('imagen_url')->nullable();
+            $table->boolean('generado')->default(false);
             $table->timestamps();
         });
     }

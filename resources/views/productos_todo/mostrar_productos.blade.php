@@ -19,7 +19,15 @@
             {{-- @foreach ($imagenesAleatorias as $imagen)
                 <img src="{{ $imagen }}" alt="Imagen aleatoria">
             @endforeach --}}
-            <img src="{{ $producto->imagen_url }}" alt="Imagen del producto">
+            {{-- <img src="{{ $producto->imagen_url }}" alt="Imagen del producto"> --}}
+            @if ($producto->generado == true) {
+              <img src="{{ $producto->imagen_url }}" alt="Imagen del producto"> {{-- // Los datos fueron generados por un seeder --}}
+            } @else {
+                @foreach ($imagenesAleatorias as $imagen)
+                  <img src="{{ $imagen }}" alt="Imagen aleatoria">
+                @endforeach  {{-- // Los datos fueron introducidos por un usuario --}}
+            }
+            @endif
             
               <div class="mt-2">
                 <dl>

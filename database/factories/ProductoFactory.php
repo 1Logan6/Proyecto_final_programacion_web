@@ -17,7 +17,7 @@ class ProductoFactory extends Factory
     public function definition(): array
     {
         // Genera la URL de la imagen aleatoria
-        $imagenesAleatorias = $this->generarImagenesAleatorias(2);
+        $imagenesAleatorias = $this->generarImagenesAleatorias(1);
         $imagenUrl = $imagenesAleatorias[0];
 
         return [
@@ -27,6 +27,7 @@ class ProductoFactory extends Factory
             'fecha_vencimiento'=>fake()->date(),
             'stock'=>fake()->randomDigit(),
             'imagen_url' => $imagenUrl,
+            'generado'=>true,
         ];
     }
 

@@ -55,7 +55,21 @@
                             alt=""
                             class="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[450px]"
                         /> --}}
-                        <img src="{{ $producto->imagen_url }}" alt="Imagen del producto">
+                        
+                        {{-- <img src="{{ $producto->imagen_url }}" alt="Imagen del producto"> --}}
+
+                        {{-- @foreach ($imagenesAleatorias as $imagen)
+                            <img src="{{ $imagen }}" alt="Imagen aleatoria">
+                        @endforeach --}}
+
+                        @if ($producto->generado == true) {
+                                <img src="{{ $producto->imagen_url }}" alt="Imagen del producto"> {{-- // Los datos fueron generados por un seeder --}}
+                          } @else {
+                                @foreach ($imagenesAleatorias as $imagen)
+                                <img src="{{ $imagen }}" alt="Imagen aleatoria">
+                                @endforeach  {{-- // Los datos fueron introducidos por un usuario --}}
+                          }
+                        @endif
 
                         <div class="relative pt-3 bg-white">
                             <h3
