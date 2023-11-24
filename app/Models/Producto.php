@@ -15,6 +15,8 @@ class Producto extends Model
         'fecha_vencimiento',
         'nombre',
         'stock',
+        'imagen_url',
+        'generado',
     ];
 
     //Este se puede usar en lugar del fillable, pero es mas seguro con el fillable para mas seguridad
