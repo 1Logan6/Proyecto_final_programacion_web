@@ -52,6 +52,8 @@ Route::get('/carrito', [CartController::class, 'mostrarCarrito'])->name('carrito
 Route::resource('pedidos', PedidoController::class)->only(['store']);
 Route::get('/mostrar-pedidos', [PedidoController::class, 'mostrarPedidos'])->name('pedidos.mostrar');
 Route::post('/marcar-recogido/{pedidoId}', [PedidoController::class, 'marcarRecogido'])->name('pedidos.marcarRecogido');
+Route::get('/pedidos/{pedido}/detalle', [PedidoController::class, 'mostrarDetalle'])->name('pedidos.detalle');
+Route::get('/pedidos/{pedido}/detalleR', [PedidoController::class, 'mostrarDetalleR'])->name('pedidos.detalleR');
 
 
 

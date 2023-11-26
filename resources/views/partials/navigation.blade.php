@@ -40,12 +40,15 @@
               </li>
 
               <li>
-                <a
-                  class="text-gray-500 transition hover:text-gray-500/75"
-                  href="{{ route('pedidos.mostrar') }}"
-                >
-                  Pedidos
-                </a>
+                {{-- Este can solo mostrara este apartado si se cumple el gate --}}
+                @can('acces-admin')
+                  <a
+                    class="text-gray-500 transition hover:text-gray-500/75"
+                    href="{{ route('pedidos.mostrar') }}"
+                  >
+                    Pedidos
+                  </a>
+                @endcan
               </li>
 
               <li>

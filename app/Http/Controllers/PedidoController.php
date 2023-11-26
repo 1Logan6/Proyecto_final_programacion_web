@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pedido;
-use Illuminate\Http\Request;
 use App\Models\Cart;
+use App\Models\Pedido;
 use App\Models\Producto;
+use Illuminate\Http\Request;
+use App\Mail\DetallePedidoMail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class PedidoController extends Controller
 {
@@ -69,27 +71,51 @@ class PedidoController extends Controller
         // Desvincular los productos del carrito
         $carrito->productos()->detach();
 
+        Mail::to($request->user())->send(new DetallePedidoMail($pedido));
+
         return redirect('/producto')->with('success', 'Pedido realizado con éxito');
     }
 
     public function mostrarPedidos()
     {
-        $pedidos = Pedido::with(['usuario:id,name', 'productos:id,nombre'])->get();
 
-        return view('/pedidos_todo/showPedido', compact('pedidos'));
+        $pedidosActivos = Pedido::with(['usuario:id,name', 'productos:id,nombre'])
+            ->get();
+
+        $pedidosEliminados = Pedido::onlyTrashed()
+            ->with(['usuario:id,name', 'productos:id,nombre'])
+            ->get();
+
+        return view('/pedidos_todo/showPedido', compact('pedidosActivos', 'pedidosEliminados'));
     }
 
     public function marcarRecogido($pedidoId)
-{
-    $pedido = Pedido::find($pedidoId);
+    {
+        $pedido = Pedido::find($pedidoId);
 
-    if ($pedido) {
-        $pedido->delete(); // Esto hará un soft delete
-        return redirect()->route('pedidos.mostrar')->with('success', 'Pedido marcado como recogido');
+        if ($pedido) {
+            $pedido->delete(); // Esto hará un soft delete
+            return redirect()->route('pedidos.mostrar')->with('success', 'Pedido marcado como recogido');
+        }
+
+        return redirect()->route('pedidos.mostrar')->with('error', 'Pedido no encontrado');
     }
 
-    return redirect()->route('pedidos.mostrar')->with('error', 'Pedido no encontrado');
-}
+    public function mostrarDetalle($pedidoId)
+    {
+        $pedido = Pedido::with(['usuario:id,name', 'productos:id,nombre'])->find($pedidoId);
+
+        return view('/pedidos_todo/detallePedido', compact('pedido'));
+    }
+
+        public function mostrarDetalleR($pedidoId)
+    {
+        $pedido = Pedido::withTrashed()
+        ->with(['usuario:id,name', 'productos:id,nombre'])
+        ->find($pedidoId);
+
+        return view('/pedidos_todo/detallePedidoRecogido', compact('pedido'));
+    }
 
     /**
      * Display the specified resource.
