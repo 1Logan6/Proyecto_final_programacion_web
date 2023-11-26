@@ -69,8 +69,27 @@ class PedidoController extends Controller
         // Desvincular los productos del carrito
         $carrito->productos()->detach();
 
-        return redirect()->route('inicio')->with('success', 'Pedido realizado con éxito');
+        return redirect('/producto')->with('success', 'Pedido realizado con éxito');
     }
+
+    public function mostrarPedidos()
+    {
+        $pedidos = Pedido::with(['usuario:id,name', 'productos:id,nombre'])->get();
+
+        return view('/pedidos_todo/showPedido', compact('pedidos'));
+    }
+
+    public function marcarRecogido($pedidoId)
+{
+    $pedido = Pedido::find($pedidoId);
+
+    if ($pedido) {
+        $pedido->delete(); // Esto hará un soft delete
+        return redirect()->route('pedidos.mostrar')->with('success', 'Pedido marcado como recogido');
+    }
+
+    return redirect()->route('pedidos.mostrar')->with('error', 'Pedido no encontrado');
+}
 
     /**
      * Display the specified resource.
