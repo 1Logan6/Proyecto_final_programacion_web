@@ -36,6 +36,7 @@ Route::get('/', function () {
 // });
 
 Route::get('/producto/pdf/get', [ProductoController::class, 'pdf'])->name('producto.pdf');
+Route::get('producto-descarga/{producto}', [ProductoController::class, 'descargar'])->name('producto.descarga');
 
 Route::resource('producto', ProductoController::class);
 Route::resource('venta', VentasController::class);

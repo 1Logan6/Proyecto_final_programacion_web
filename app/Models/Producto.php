@@ -17,6 +17,8 @@ class Producto extends Model
         'stock',
         'imagen_url',
         'generado',
+        'archivo_ubicacion',
+        'archivo_nombre',
     ];
 
     //Este se puede usar en lugar del fillable, pero es mas seguro con el fillable para mas seguridad

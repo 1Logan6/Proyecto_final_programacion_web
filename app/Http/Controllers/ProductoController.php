@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ProductoController extends Controller
 {
@@ -34,7 +35,23 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $request->validate([
+        //     'nombre' => 'required',
+        //     'precio' => 'required',
+        //     'descripcion' => 'required',
+        //     'fecha_vencimiento' => 'required',
+        //     'stock' => 'required',
+        //     'archivo' => 'required|10000',
+        // ]);
+        
+        if (!$request->file('archivo')->isValid()) {
+            
+        }
+        
+        $request->merge([
+            'archivo_nombre' => $request->file('archivo')->getClientOriginalName(),
+            'archivo_ubicacion' => $request->file('archivo')->store('public/img'),
+        ]);
 
         Producto::create($request->all());
 
@@ -121,5 +138,10 @@ class ProductoController extends Controller
         }
 
         return $imagenes;
+    }
+
+    public function descargar(Producto $producto)
+    {
+        return Sotrage::download($producto->archivo_ubicacion);
     }
 }
