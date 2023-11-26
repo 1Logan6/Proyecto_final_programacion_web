@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\ProductoController;
-use App\Http\Controllers\ProveedorController;
-use App\Http\Controllers\VentasController;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\VentasController;
+use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\ProveedorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,10 @@ Route::get('/producto/pdf/get', [ProductoController::class, 'pdf'])->name('produ
 Route::resource('producto', ProductoController::class);
 Route::resource('proveedor', ProveedorController::class);
 Route::resource('venta', VentasController::class);
+
+
+Route::get('/producto/{id}', [ProductoController::class, 'detalle'])->name('producto.detalle');
+Route::post('/agregar-al-carrito/{id}', [CartController::class, 'agregarAlCarrito'])->name('agregar-al-carrito');
 
 Route::middleware([
     'auth:sanctum',

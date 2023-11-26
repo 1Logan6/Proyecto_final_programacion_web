@@ -73,6 +73,18 @@
             </a>
       </div>
     </div>
+    <div class="container">
+      <h1>{{ $producto->nombre }}</h1>
+      <p>Precio: ${{ $producto->precio }}</p>
+      <p>Stock disponible: {{ $producto->stock }} piezas</p>
+
+      <form action="{{ route('agregar-al-carrito', $producto->id) }}" method="POST">
+          @csrf
+          <label for="cantidad">Cantidad:</label>
+          <input type="number" name="cantidad" value="1" min="1" max="{{ $producto->stock }}">
+          <button type="submit">Agregar al carrito</button>
+      </form>
+    </div>
 
 </body>
 
