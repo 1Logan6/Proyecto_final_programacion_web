@@ -46,6 +46,8 @@ Route::resource('venta', VentasController::class);
 
 Route::get('/producto/{id}', [ProductoController::class, 'detalle'])->name('producto.detalle');
 Route::post('/agregar-al-carrito/{id}', [CartController::class, 'agregarAlCarrito'])->name('agregar-al-carrito');
+Route::get('/carrito', [CartController::class, 'mostrarCarrito'])->name('carrito.mostrar');
+
 
 Route::middleware([
     'auth:sanctum',

@@ -98,7 +98,7 @@
               </form>
             </div>
           @else
-            <p class="text-red-500 font-bold text-2xl">El producto {{ $producto->nombre }} no tiene stock por el momento. ¡Pronto habrá más disponibles!</El>
+            <p class="text-red-500 font-bold text-2xl">El producto {{ $producto->nombre }} no tiene stock por el momento. ¡Pronto habrá más disponibles!</p>
           @endif
 
       </div>

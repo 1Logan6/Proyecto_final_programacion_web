@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Producto;
 use App\Models\Cart;
+use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -41,5 +42,25 @@ class CartController extends Controller
 
         // Redireccionar a la vista del producto o a la página del carrito
         return redirect()->route('producto.detalle', $producto->id)->with('success', 'Producto agregado al carrito');
+    }
+
+    public function mostrarCarrito()
+    {
+        // Obtener el usuario autenticado
+        $user = Auth::user();
+
+        // Obtener el carrito del usuario
+        $carrito = $user->cart;
+
+        // Obtener los productos en el carrito
+        $productosEnCarrito = $carrito->productos;
+
+        // Calcular el total
+        $total = 0;
+        foreach ($productosEnCarrito as $producto) {
+            $total += $producto->precio * $producto->pivot->cantidad;
+        }
+
+        return view('/carritos_todo/showCart', compact('productosEnCarrito', 'total'));
     }
 }
