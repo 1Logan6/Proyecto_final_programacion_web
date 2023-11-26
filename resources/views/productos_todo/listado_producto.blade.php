@@ -13,30 +13,26 @@
 
     @include('partials.navigation')
 
-    {{-- <h1> Estos son los productos que tenemos: </h1><br>
+    @if(Session::has('producto_borrado'))
 
-    <ul>
-        @foreach ($productos as $producto)
-            <li>
-                
-                <a href="{{ route('producto.show', $producto) }}">
-                    {{ $producto -> nombre }}
-                </a>
-                <a href="{{ route('producto.edit', $producto) }}">
-                    Edit
-                </a>
+        <div class="bg-green-500 text-white p-4 rounded-md mb-4">
+            {{ session('producto_borrado') }}
+        </div>
+    @elseif(Session::has('producto_agregado'))
+        <div class="bg-green-500 text-white p-4 rounded-md mb-4">
+            {{ session('producto_agregado') }}
+        </div>
+    @elseif(Session::has('producto_editado'))
+        <div class="bg-green-500 text-white p-4 rounded-md mb-4">
+            {{ session('producto_editado') }}
+        </div>
+    @elseif(Session::has('pedido_realizado'))
+        <div class="bg-green-500 text-white p-4 rounded-md mb-4">
+            {{ session('pedido_realizado') }}
+        </div>
+    @endif
 
-                <form action="{{route('producto.destroy', $producto)}}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit">Eliminar</button>
-                </form>
-
-            </li>
-             
-        @endforeach
-    </ul> --}}
-
+    
     <section>
           <div class="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 sm:py-12 lg:px-8">
             <header>

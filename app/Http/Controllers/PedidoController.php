@@ -10,6 +10,7 @@ use App\Mail\DetallePedidoMail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 
 class PedidoController extends Controller
 {
@@ -72,6 +73,8 @@ class PedidoController extends Controller
         $carrito->productos()->detach();
 
         Mail::to($request->user())->send(new DetallePedidoMail($pedido));
+
+        Session::flash('pedido_realizado','El pedido ha sido realizado con exito');
 
         return redirect('/producto')->with('success', 'Pedido realizado con éxito');
     }

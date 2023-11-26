@@ -7,6 +7,7 @@ use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
@@ -41,6 +42,7 @@ class CartController extends Controller
         $producto->update(['stock' => $nuevoStock]);
 
         // Redireccionar a la vista del producto o a la página del carrito
+        Session::flash('producto_agregado_cart','El producto ha sido agregado al carrito');
         return redirect()->route('producto.detalle', $producto->id)->with('success', 'Producto agregado al carrito');
     }
 

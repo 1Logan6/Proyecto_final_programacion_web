@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Mail\NotificaProductoCreado;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 
 class ProductoController extends Controller
 {
@@ -51,6 +52,7 @@ class ProductoController extends Controller
 
 
         Mail::to($request->user())->send(new NotificaProductoCreado($producto));
+        Session::flash('producto_agregado','El producto ha sido creado con exito');
         return redirect('/producto');
     }
 
@@ -97,6 +99,7 @@ class ProductoController extends Controller
 
         $producto->save(); */
 
+        Session::flash('producto_editado','El producto ha sido editado con exito');
         return redirect('/producto');
     }
 
@@ -105,6 +108,8 @@ class ProductoController extends Controller
      */
     public function destroy(Producto $producto)
     {
+        Session::flash('producto_borrado','El producto ha sido borrado con exito');
+
         $this->authorize('viewAny', Producto::class);
         $producto->delete();
         return redirect()->route('producto.index');

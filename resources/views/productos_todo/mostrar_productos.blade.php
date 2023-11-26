@@ -15,6 +15,12 @@
 
     @include('partials.navigation')
 
+    @if(Session::has('producto_agregado_cart'))
+        <div class="bg-green-500 text-white p-4 rounded-md mb-4">
+            {{ session('producto_agregado_cart') }}
+        </div>
+    @endif
+
     <div class="min-h-screen flex items-center justify-center">
       <div class="max-w-sm mx-auto">
           <a href="#" class="block rounded-lg p-4 shadow-sm shadow-indigo-100">
