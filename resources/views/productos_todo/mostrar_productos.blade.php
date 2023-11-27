@@ -7,11 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mostrar Producto</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/819f23fb66.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
 
     @include('partials.navigation')
+
+    @if(Session::has('producto_agregado_cart'))
+        <div class="bg-green-500 text-white p-4 rounded-md mb-4">
+            {{ session('producto_agregado_cart') }}
+        </div>
+    @endif
 
     <div class="min-h-screen flex items-center justify-center">
       <div class="max-w-sm mx-auto">
@@ -71,8 +79,37 @@
                 </div>
               </div>
             </a>
+
+          @if ($producto->stock > 0)
+            <div class="container">
+              {{-- <h1>{{ $producto->nombre }}</h1>
+              <p>Precio: ${{ $producto->precio }}</p>
+              <p>Stock disponible: {{ $producto->stock }} piezas</p> --}}
+          
+              {{-- <form action="{{ route('agregar-al-carrito', $producto->id) }}" method="POST">
+                  @csrf
+                  <label for="cantidad">Cantidad:</label>
+                  <input type="number" name="cantidad" value="1" min="1">
+                  <button type="submit">Agregar al carrito</button>
+              </form> --}}
+              <form action="{{ route('agregar-al-carrito', $producto->id) }}" method="POST" class="flex items-center space-x-2">
+                @csrf
+                <label for="cantidad" class="text-gray-700">Cantidad:</label>
+                <input type="number" name="cantidad" value="1" min="1"  max="{{ $producto->stock }}" class="border border-gray-300 p-2 w-16 focus:outline-none focus:border-blue-500">
+            
+                <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-full flex items-center">
+                  <i class="fa-solid fa-cart-shopping" style="color: #5805bd;"></i>
+                    Agregar al carrito
+                </button>
+              </form>
+            </div>
+          @else
+            <p class="text-red-500 font-bold text-2xl">El producto {{ $producto->nombre }} no tiene stock por el momento. ¡Pronto habrá más disponibles!</p>
+          @endif
+
       </div>
     </div>
+    
 
 </body>
 
