@@ -33,6 +33,9 @@
         <label for="stock">Cantidad stock</label><br>
         <input type="number" name="stock" value = "{{old('stock') ?? $producto->stock}}"><br>
 
+        {{-- <label for="archivo">Cargar imagen</label><br>
+        <input type="file" name="archivo" value = "{{old('archivo') ?? $producto->archivo_nombre }}"><br> --}}
+
         <input type="submit" value="Enviar">
     </form>
 </body>

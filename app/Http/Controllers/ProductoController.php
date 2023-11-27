@@ -99,9 +99,19 @@ class ProductoController extends Controller
             'descripcion' => 'required',
             'fecha_vencimiento' => 'required',
             'stock' => 'required',
+            // 'archivo' => 'sometimes|nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // El campo 'archivo' es opcional
         ]);
-
         /* dd($request->all()); */
+        // if ($request->hasFile('archivo') && $request->file('archivo')->isValid()) {
+        //     $archivoNombre = $request->file('archivo')->getClientOriginalName();
+        //     $archivoUbicacion = $request->file('archivo')->store('public/img');
+    
+        //     $request->merge([
+        //         'archivo_nombre' => $archivoNombre,
+        //         'archivo_ubicacion' => $archivoUbicacion,
+        //     ]);
+        // }
+
         Producto::where('id', $producto->id)
             ->update($request->except('_token', '_method'));
 
