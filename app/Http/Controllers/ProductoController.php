@@ -6,6 +6,7 @@ use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class ProductoController extends Controller
 {
@@ -48,9 +49,23 @@ class ProductoController extends Controller
             
         }
         
+        //Se guarda la imagen en el directorio "public/img"
+        $rutaImagen = $request->file('archivo')->store('public/img/');
+        
+        //Dimensionar la imagen:
+        $imagen = Image::make(storage_path('app/' . $rutaImagen));
+        $imagen->resize(800, 600); // Dimensiones deseadas
+        
+        // Guardar la imagen dimensionada
+        $rutaDimensionada = 'public/img/' . $request->file('archivo')->getClientOriginalName();
+        $imagen->save(storage_path('app/' . $rutaDimensionada));
+        
+        //Eliminar imagen no redimensionada:
+        Storage::delete($rutaImagen);
+        
         $request->merge([
             'archivo_nombre' => $request->file('archivo')->getClientOriginalName(),
-            'archivo_ubicacion' => $request->file('archivo')->store('public/img'),
+            'archivo_ubicacion' => $rutaDimensionada,
         ]);
 
         Producto::create($request->all());
@@ -121,6 +136,14 @@ class ProductoController extends Controller
      */
     public function destroy(Producto $producto)
     {
+            // Obtener la ruta del archivo asociado
+        $rutaArchivo = $producto->archivo_ubicacion;
+
+        // Verificar si el archivo existe y eliminarlo
+        if ($rutaArchivo && Storage::exists($rutaArchivo)) {
+            Storage::delete($rutaArchivo);
+        }
+
         $producto->delete();
         return redirect()->route('producto.index');
     }
