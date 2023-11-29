@@ -116,19 +116,32 @@ class ProductoController extends Controller
             'stock' => 'required',
         ]);
 
-        // if ($request->hasFile('archivo') && $request->file('archivo')->isValid()) {
-        //     // Eliminar la imagen existente si hay una
-        //     if ($producto->archivo_ubicacion) {
-        //         Storage::delete($producto->archivo_ubicacion);
-        //     }
-    
-        //     // Guardar la nueva imagen y obtener su ruta
-        //     $rutaImagen = $request->file('archivo')->store('public/img/');
-    
-        //     // Actualizar la ruta de la imagen en la base de datos
-        //     $producto->archivo_ubicacion = $rutaImagen;
+        if ($request->hasFile('archivo_ubicacion')) {
+            // Eliminar la imagen existente si hay una
+            // Guardar la nueva imagen y obtener su ruta
+            //$rutaImagen = $request->file('archivo_ubicacion')->store('public/edit/');
+            if ($producto->archivo_ubicacion) {
+                Storage::delete($producto->archivo_ubicacion);
+            }
 
-        // }
+            $rutaImagen = $request->file('archivo_ubicacion')->store('public/img/');
+        
+            //Dimensionar la imagen:
+            $imagen = Image::make(storage_path('app/' . $rutaImagen));
+            $imagen->resize(800, 600); // Dimensiones deseadas
+            
+            // Guardar la imagen dimensionada
+            $rutaDimensionada = 'public/img/' . $request->file('archivo_ubicacion')->getClientOriginalName();
+            $imagen->save(storage_path('app/' . $rutaDimensionada));
+            
+            //Eliminar imagen no redimensionada:
+            Storage::delete($rutaImagen);
+            
+            $request->merge([
+                'archivo_nombre' => $request->file('archivo')->getClientOriginalName(),
+                'archivo_ubicacion' => $rutaDimensionada,
+            ]);
+        }
 
         /* dd($request->all()); */
         Producto::where('id', $producto->id)

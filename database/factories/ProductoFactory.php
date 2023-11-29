@@ -26,8 +26,8 @@ class ProductoFactory extends Factory
             'nombre'=>fake()->sentence(),
             'fecha_vencimiento'=>fake()->date(),
             'stock'=>fake()->randomDigit(),
-            'imagen_url' => $imagenUrl,
-            'generado'=>true,
+            'archivo_ubicacion' => $imagenUrl,
+            //'generado'=>true,
         ];
     }
 

@@ -20,14 +20,10 @@
                 <img src="{{ $imagen }}" alt="Imagen aleatoria">
             @endforeach --}}
             {{-- <img src="{{ $producto->imagen_url }}" alt="Imagen del producto"> --}}
-            @if ($producto->generado == true) {
-              <img src="{{ $producto->imagen_url }}" alt="Imagen del producto"> {{-- Los datos fueron generados por un seeder --}}
-            } @else {
-              <img src="{{ \Storage::url($producto->archivo_ubicacion) }}" alt="{{$producto->archivo_nombre}}">  {{-- Los datos fueron introducidos por un usuario --}}
-              {{-- @foreach ($imagenesAleatorias as $imagen)
-                <img src="{{ $imagen }}" alt="Imagen aleatoria">
-              @endforeach   --}}
-            }
+            @if ($producto->archivo_nombre == "nada") 
+                <img src="{{ $producto->archivo_ubicacion }}" alt="Imagen del producto"> {{-- // Los datos fueron generados por un seeder --}}
+            @else 
+                <img src="{{ \Storage::url($producto->archivo_ubicacion) }}" alt="{{ $producto->archivo_nombre }}"> {{-- Los datos fueron introducidos por un usuario --}}
             @endif
             
               <div class="mt-2">

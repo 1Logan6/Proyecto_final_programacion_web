@@ -18,8 +18,6 @@ return new class extends Migration
             $table->date('fecha_vencimiento');
             $table->string('nombre');
             $table->smallInteger('stock');
-            $table->string('imagen_url')->nullable();
-            $table->boolean('generado')->default(false);
             $table->string('archivo_ubicacion')->default("nada");
             $table->string('archivo_nombre')->default("nada");
             $table->timestamps();
