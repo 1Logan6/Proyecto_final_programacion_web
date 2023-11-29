@@ -18,9 +18,9 @@ class ProductoController extends Controller
         $productos = Producto::all();
         // dd($productos);
 
-        $imagenesAleatorias = $this->generarImagenesAleatorias(1);
+        //$imagenesAleatorias = $this->generarImagenesAleatorias(1);
 
-        return view('//productos_todo/listado_producto', compact('productos', 'imagenesAleatorias'));
+        return view('/productos_todo/listado_producto', compact('productos'));
     }
 
     /**
@@ -90,9 +90,9 @@ class ProductoController extends Controller
      */
     public function show(Producto $producto)
     {
-        $imagenesAleatorias = $this->generarImagenesAleatorias(1);
+        //$imagenesAleatorias = $this->generarImagenesAleatorias(1);
 
-        return view('/productos_todo/mostrar_productos', compact('producto', 'imagenesAleatorias'));
+        return view('/productos_todo/mostrar_productos', compact('producto'));
     }
 
     /**
@@ -116,32 +116,32 @@ class ProductoController extends Controller
             'stock' => 'required',
         ]);
 
-        if ($request->hasFile('archivo_ubicacion')) {
-            // Eliminar la imagen existente si hay una
-            // Guardar la nueva imagen y obtener su ruta
-            //$rutaImagen = $request->file('archivo_ubicacion')->store('public/edit/');
-            if ($producto->archivo_ubicacion) {
-                Storage::delete($producto->archivo_ubicacion);
-            }
+        // if ($request->hasFile('archivo_ubicacion')) {
+        //     // Eliminar la imagen existente si hay una
+        //     // Guardar la nueva imagen y obtener su ruta
+        //     //$rutaImagen = $request->file('archivo_ubicacion')->store('public/edit/');
+        //     if ($producto->archivo_ubicacion) {
+        //         Storage::delete($producto->archivo_ubicacion);
+        //     }
 
-            $rutaImagen = $request->file('archivo_ubicacion')->store('public/img/');
+        //     $rutaImagen = $request->file('archivo_ubicacion')->store('public/img/');
         
-            //Dimensionar la imagen:
-            $imagen = Image::make(storage_path('app/' . $rutaImagen));
-            $imagen->resize(800, 600); // Dimensiones deseadas
+        //     //Dimensionar la imagen:
+        //     $imagen = Image::make(storage_path('app/' . $rutaImagen));
+        //     $imagen->resize(800, 600); // Dimensiones deseadas
             
-            // Guardar la imagen dimensionada
-            $rutaDimensionada = 'public/img/' . $request->file('archivo_ubicacion')->getClientOriginalName();
-            $imagen->save(storage_path('app/' . $rutaDimensionada));
+        //     // Guardar la imagen dimensionada
+        //     $rutaDimensionada = 'public/img/' . $request->file('archivo_ubicacion')->getClientOriginalName();
+        //     $imagen->save(storage_path('app/' . $rutaDimensionada));
             
-            //Eliminar imagen no redimensionada:
-            Storage::delete($rutaImagen);
+        //     //Eliminar imagen no redimensionada:
+        //     Storage::delete($rutaImagen);
             
-            $request->merge([
-                'archivo_nombre' => $request->file('archivo')->getClientOriginalName(),
-                'archivo_ubicacion' => $rutaDimensionada,
-            ]);
-        }
+        //     $request->merge([
+        //         'archivo_nombre' => $request->file('archivo_ubicacion')->getClientOriginalName(),
+        //         'archivo_ubicacion' => $rutaDimensionada,
+        //     ]);
+        // }
 
         /* dd($request->all()); */
         Producto::where('id', $producto->id)
@@ -175,23 +175,23 @@ class ProductoController extends Controller
         return redirect()->route('producto.index');
     }
 
-    public function generarImagenesAleatorias($cantidad)
-    {
-        $imagenes = [];
+    // public function generarImagenesAleatorias($cantidad)
+    // {
+    //     $imagenes = [];
 
-        for ($i = 0; $i < $cantidad; $i++) {
-            $terminosDeBusqueda = ["dulces", "candies", "sweets"];
-            $terminoAleatorio = $terminosDeBusqueda[array_rand($terminosDeBusqueda)];
-            $imageSize = "800x600"; // Tamaño deseado de la imagen
+    //     for ($i = 0; $i < $cantidad; $i++) {
+    //         $terminosDeBusqueda = ["dulces", "candies", "sweets"];
+    //         $terminoAleatorio = $terminosDeBusqueda[array_rand($terminosDeBusqueda)];
+    //         $imageSize = "800x600"; // Tamaño deseado de la imagen
 
-            $imagenes[] = "https://source.unsplash.com/${imageSize}/?${terminoAleatorio}";
-        }
+    //         $imagenes[] = "https://source.unsplash.com/${imageSize}/?${terminoAleatorio}";
+    //     }
 
-        return $imagenes;
-    }
+    //     return $imagenes;
+    // }
 
-    public function descargar(Producto $producto)
-    {
-        return Sotrage::download($producto->archivo_ubicacion);
-    }
+    // public function descargar(Producto $producto)
+    // {
+    //     return Sotrage::download($producto->archivo_ubicacion);
+    // }
 }
