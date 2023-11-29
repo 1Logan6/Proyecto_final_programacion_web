@@ -116,6 +116,20 @@ class ProductoController extends Controller
             'stock' => 'required',
         ]);
 
+        // if ($request->hasFile('archivo') && $request->file('archivo')->isValid()) {
+        //     // Eliminar la imagen existente si hay una
+        //     if ($producto->archivo_ubicacion) {
+        //         Storage::delete($producto->archivo_ubicacion);
+        //     }
+    
+        //     // Guardar la nueva imagen y obtener su ruta
+        //     $rutaImagen = $request->file('archivo')->store('public/img/');
+    
+        //     // Actualizar la ruta de la imagen en la base de datos
+        //     $producto->archivo_ubicacion = $rutaImagen;
+
+        // }
+
         /* dd($request->all()); */
         Producto::where('id', $producto->id)
             ->update($request->except('_token', '_method'));
@@ -136,7 +150,7 @@ class ProductoController extends Controller
      */
     public function destroy(Producto $producto)
     {
-            // Obtener la ruta del archivo asociado
+        // Obtener la ruta del archivo asociado
         $rutaArchivo = $producto->archivo_ubicacion;
 
         // Verificar si el archivo existe y eliminarlo
