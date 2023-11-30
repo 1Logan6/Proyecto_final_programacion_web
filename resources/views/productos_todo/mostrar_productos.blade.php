@@ -24,11 +24,19 @@
     <div class="min-h-screen flex items-center justify-center">
       <div class="max-w-sm mx-auto">
           <a href="#" class="block rounded-lg p-4 shadow-sm shadow-indigo-100">
-              <img
+              {{-- <img
                 alt="Home"
                 src="https://dulcesdelarosa.com.mx/wp-content/uploads/dulces-de-la-rosa-caramelos-suaves-aciduladito-800x600.png"
                 class="h-56 w-full rounded-md object-cover"
-              />
+              /> --}}
+              @if ($producto->archivo_nombre == "nada") 
+                <img src="{{ $producto->archivo_ubicacion }}" alt="Imagen del producto"> {{-- // Los datos fueron generados por el seeder --}}
+              @else 
+                <img src="{{ \Storage::url($producto->archivo_ubicacion) }}" alt="{{ $producto->archivo_nombre }}"> {{-- Los datos fueron introducidos por el usuario --}}
+                {{-- @foreach ($imagenesAleatorias as $imagen)
+                  <img src="{{ $imagen }}" alt="Imagen aleatoria">
+                @endforeach   --}}
+              @endif
             
               <div class="mt-2">
                 <dl>

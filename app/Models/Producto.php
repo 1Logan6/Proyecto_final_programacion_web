@@ -15,6 +15,8 @@ class Producto extends Model
         'fecha_vencimiento',
         'nombre',
         'stock',
+        'archivo_ubicacion',
+        'archivo_nombre',
     ];
 
     //Este se puede usar en lugar del fillable, pero es mas seguro con el fillable para mas seguridad
@@ -24,6 +26,51 @@ class Producto extends Model
     protected $table = 'productos';
     public $timestamps = false;
 
+    //***********************************************************************  
+    //************************ ACCESSOR Y MUTATORS **************************
+    //***********************************************************************
+
+    // Mutator para formatear el precio antes de guardarlo
+    public function setPrecioAttribute($value)
+    {
+        // Puedes realizar alguna manipulación en el valor antes de guardarlo
+        $this->attributes['precio'] = number_format($value, 2);
+    }
+
+    // Accessor para formatear la descripción
+    public function getDescripcionAttribute($value)
+    {
+        return ucfirst($value); // Capitaliza la primera letra de la descripción
+    }
+
+    // Accessor para formatear la fecha de vencimiento
+    public function getFechaVencimientoAttribute($value)
+    {
+        // Puedes modificar el formato de la fecha al acceder al atributo
+        return date('Y-m-d', strtotime($value));
+    }
+    
+    // Mutator para asegurarse de que el nombre siempre esté en mayúsculas antes de guardarlo
+    public function setNombreAttribute($value)
+    {
+        $this->attributes['nombre'] = strtoupper($value);
+    }
+
+    // Mutator para asegurarse de que el stock sea un número entero antes de guardarlo
+    public function setStockAttribute($value)
+    {
+        $this->attributes['stock'] = intval($value);
+    }
+
+    // Accessor para construir la URL completa de la imagen (ejemplo)
+    public function getArchivo_ubicacionAttribute($value)
+    {
+        return asset('public/' . $value); // Supongamos que las imágenes se almacenan en la carpeta 'uploads'
+    }
+
+    //***********************************************************************  
+    //***************************** RELACIONES ******************************
+    //***********************************************************************
 
     public function productos()
     {
