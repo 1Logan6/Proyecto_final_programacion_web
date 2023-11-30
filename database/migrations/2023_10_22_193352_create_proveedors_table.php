@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('correo');
             $table->string('direccion');
             $table->string('nombre_empresa');
+            $table->string('prov_archivo_ubicacion')->nullable();
+            $table->string('prov_archivo_nombre')->default("nada");
             $table->timestamps();
         });
     }
