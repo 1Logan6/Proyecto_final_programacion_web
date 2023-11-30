@@ -18,7 +18,7 @@ class ProveedorFactory extends Factory
     {
         return [
             'nombre_completo'=>fake()->sentence(),
-            'num_telefono'=>fake()->phoneNumber(),
+            'num_telefono'=>fake()->e164PhoneNumber(),
             'correo'=>fake()->email(),
             'direccion'=>fake()->sentence(),
             'nombre_empresa'=>fake()->sentence()
