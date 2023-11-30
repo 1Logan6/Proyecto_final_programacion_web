@@ -39,9 +39,9 @@ class ProveedorController extends Controller
         $request->validate([
             'nombre_completo' => 'required|max:255',
             'num_telefono' => 'required',
-            'correo' => 'required',
-            'direccion' => 'required',
-            'nombre_empresa' => 'required',
+            'correo' => 'required|email',
+            'direccion' => 'required|string',
+            'nombre_empresa' => 'required|string',
         ]);
 
         // Proveedor::create($request->all());
@@ -84,9 +84,9 @@ class ProveedorController extends Controller
         $request->validate([
             'nombre_completo' => 'required|max:255',
             'num_telefono' => 'required',
-            'correo' => 'required',
-            'direccion' => 'required',
-            'nombre_empresa' => 'required',
+            'correo' => 'required|email',
+            'direccion' => 'required|string',
+            'nombre_empresa' => 'required|string',
         ]);
 
         Proveedor::where('id', $proveedor->id)

@@ -61,6 +61,14 @@ class ProductoController extends Controller
         ]);
         //
 
+        $request->validate([
+            'nombre' => 'required|string',
+            'precio' => 'required|numeric',
+            'descripcion' => 'required|string',
+            'fecha_vencimiento' => 'required',
+            'stock' => 'required|integer',
+        ]);
+
         $producto = Producto::create($request->all());
 
         /* $producto = new Producto();
