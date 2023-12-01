@@ -41,9 +41,9 @@ class ProveedorController extends Controller
         $request->validate([
             'nombre_completo' => 'required|max:255',
             'num_telefono' => 'required',
-            'correo' => 'required|email',
-            'direccion' => 'required|string',
-            'nombre_empresa' => 'required|string',
+            'correo' => 'required|email|email',
+            'direccion' => 'required|string|string',
+            'nombre_empresa' => 'required|string|string',
             'archivo' => 'required|file|mimes:jpg,jpeg,png,gif',
         ], ['archivo.mimes' => 'El archivo debe ser una imagen con formato JPG, JPEG, PNG o GIF.',
         ]);
@@ -115,9 +115,9 @@ class ProveedorController extends Controller
         $request->validate([
             'nombre_completo' => 'required|max:255',
             'num_telefono' => 'required',
-            'correo' => 'required',
-            'direccion' => 'required',
-            'nombre_empresa' => 'required',
+            'correo' => 'required|email',
+            'direccion' => 'required|string',
+            'nombre_empresa' => 'required|string',
         ]);
 
         Proveedor::where('id', $proveedor->id)
