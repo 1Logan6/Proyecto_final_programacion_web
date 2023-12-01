@@ -53,9 +53,11 @@
                         /> --}}
 
                         @if ($producto->archivo_nombre == "nada") 
-                            <img src="{{ $producto->archivo_ubicacion }}" alt="Imagen del producto"> {{-- // Los datos fueron generados por un seeder --}}
+                            <img class="h-56 w-full rounded-md object-cover" 
+                                src="{{ $producto->archivo_ubicacion }}" alt="Imagen del producto"> {{-- // Los datos fueron generados por un seeder --}}
                         @else 
-                            <img src="{{ \Storage::url($producto->archivo_ubicacion) }}" alt="{{ $producto->archivo_nombre }}"> {{-- Los datos fueron introducidos por un usuario --}}
+                            <img class="h-56 w-full rounded-md object-cover"
+                                src="{{ \Storage::url($producto->archivo_ubicacion) }}" alt="{{ $producto->archivo_nombre }}"> {{-- Los datos fueron introducidos por un usuario --}}
                             {{-- @foreach ($imagenesAleatorias as $imagen)
                               <img src="{{ $imagen }}" alt="Imagen aleatoria">
                             @endforeach   --}}

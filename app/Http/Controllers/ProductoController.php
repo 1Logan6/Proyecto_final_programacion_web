@@ -37,6 +37,16 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nombre' => 'required|string',
+            'precio' => 'required|numeric',
+            'descripcion' => 'required|string',
+            'fecha_vencimiento' => 'required',
+            'stock' => 'required|integer',
+            'archivo' => 'required|file|mimes:jpeg,png,gif,jpg',
+        ], ['archivo.mimes' => 'El archivo debe ser una imagen con formato JPG, JPEG, PNG o GIF.',
+        ]);
+
         if (!$request->file('archivo')->isValid()) {
             
         }

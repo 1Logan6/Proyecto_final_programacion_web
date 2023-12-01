@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Proveedor;
 use App\Models\Producto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class ProveedorController extends Controller
 {
@@ -39,12 +41,41 @@ class ProveedorController extends Controller
         $request->validate([
             'nombre_completo' => 'required|max:255',
             'num_telefono' => 'required',
-            'correo' => 'required|email',
-            'direccion' => 'required|string',
-            'nombre_empresa' => 'required|string',
+            'correo' => 'required|email|email',
+            'direccion' => 'required|string|string',
+            'nombre_empresa' => 'required|string|string',
+            'archivo' => 'required|file|mimes:jpg,jpeg,png,gif',
+        ], ['archivo.mimes' => 'El archivo debe ser una imagen con formato JPG, JPEG, PNG o GIF.',
         ]);
 
         // Proveedor::create($request->all());
+
+        if (!$request->file('archivo')->isValid()) {
+            
+        }
+        
+        //Se guarda la imagen en el directorio "public/img"
+        $rutaImagen = $request->file('archivo')->store('public/img/');
+        
+        //Dimensionar la imagen:
+        $imagen = Image::make(storage_path('app/' . $rutaImagen));
+        $imagen->resize(80, 80); // Dimensiones deseadas
+        
+        // Cambiar el nombre del archivo por si se quiere utilizar la misma imagen que en el producto:
+        $nombreOriginal = $request->file('archivo')->getClientOriginalName();
+        $nuevoNombre = 'logo_' . $nombreOriginal;
+
+        // Guardar la imagen dimensionada
+        $rutaDimensionada = 'public/img/' . $nuevoNombre;
+        $imagen->save(storage_path('app/' . $rutaDimensionada));
+        
+        //Eliminar imagen no redimensionada:
+        Storage::delete($rutaImagen);
+        
+        $request->merge([
+            'prov_archivo_nombre' => $request->file('archivo')->getClientOriginalName(),
+            'prov_archivo_ubicacion' => $rutaDimensionada,
+        ]);
 
         $prods = Proveedor::create($request->all());
 
@@ -106,6 +137,14 @@ class ProveedorController extends Controller
      */
     public function destroy(proveedor $proveedor)
     {
+        // Obtener la ruta del archivo asociado
+        $rutaArchivo = $proveedor->prov_archivo_ubicacion;
+
+        // Verificar si el archivo existe y eliminarlo
+        if ($rutaArchivo && Storage::exists($rutaArchivo)) {
+            Storage::delete($rutaArchivo);
+        }
+        
         //
         $this->authorize('viewAny', Proveedor::class);
         $proveedor->delete();

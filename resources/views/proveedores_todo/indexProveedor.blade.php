@@ -24,10 +24,18 @@
                 @foreach ($proveedores as $proveedor)
                     <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
                         <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-                            <img alt="team"
+                            {{-- <img alt="team"
                                 class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
-                                src="https://dummyimage.com/80x80">
-                            <div class="flex-grow">
+                                src="https://dummyimage.com/80x80"> --}}
+                            
+                            @if ($proveedor->prov_archivo_nombre == "nada") 
+                                <img class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" 
+                                src="{{ $proveedor->prov_archivo_ubicacion }}" alt="Imagen del producto"> <div class="flex-grow"> {{-- // Los datos fueron generados por un seeder --}}
+                            @else 
+                                <img class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" 
+                                src="{{ \Storage::url($proveedor->prov_archivo_ubicacion) }}" alt="{{ $proveedor->prov_archivo_nombre }}"> 
+                                <div class="flex-grow">{{-- Los datos fueron introducidos por un usuario --}}
+                            @endif
                                 <h2 class="text-gray-900 title-font font-medium"><a
                                         href="{{ route('proveedor.show', $proveedor) }}">
                                         {{ $proveedor->nombre_empresa }}
@@ -35,7 +43,7 @@
 
                                     {{-- Este can solo muestra el nombre del proveedor al usuario del gate --}}
                                 @can('acces-admin')
-                                    <p class="text-gray-500">{{ $proveedor->nombre_empresa }}</p>
+                                    <p class="text-gray-500">{{ $proveedor->nombre_completo }}</p>
                                 @endcan
 
                                 <div class="space-x-4">
