@@ -41,11 +41,14 @@ class ProveedorController extends Controller
         $request->validate([
             'nombre_completo' => 'required|max:255',
             'num_telefono' => 'required',
-            'correo' => 'required|email|email',
-            'direccion' => 'required|string|string',
-            'nombre_empresa' => 'required|string|string',
+            'correo' => 'required|email',
+            'direccion' => 'required|string',
+            'nombre_empresa' => 'required|string',
+<<<<<<< HEAD
             'archivo' => 'required|file|mimes:jpg,jpeg,png,gif',
         ], ['archivo.mimes' => 'El archivo debe ser una imagen con formato JPG, JPEG, PNG o GIF.',
+=======
+>>>>>>> main
         ]);
 
         // Proveedor::create($request->all());
